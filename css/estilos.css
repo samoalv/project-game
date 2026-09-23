@@ -1,0 +1,552 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #16324a;
+  font-family: "Arial Rounded MT Bold", Verdana, Arial, sans-serif;
+  user-select: none;
+  overflow: hidden;
+}
+
+/* ===== Escenario ===== */
+#escenario {
+  position: relative;
+  width: 960px;
+  height: 540px;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #6ec6ff 0%, #aee1ff 55%, #d9f3ff 100%);
+  border: 3px solid #17415f;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+/* ===== Sol ===== */
+.sol {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff7ae, #ffd23f 60%, #f5a800);
+  box-shadow: 0 0 42px 14px rgba(255, 210, 63, 0.55);
+}
+
+/* ===== Nubes ===== */
+.nube {
+  position: absolute;
+  background: #fff;
+  border-radius: 50px;
+  opacity: 0.95;
+  animation: deriva 30s linear infinite alternate;
+}
+
+.nube::before,
+.nube::after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.nube-1 {
+  top: 50px;
+  width: 90px;
+  height: 26px;
+}
+
+.nube-1::before {
+  width: 34px;
+  height: 34px;
+  left: 16px;
+  top: -16px;
+}
+
+.nube-1::after {
+  width: 26px;
+  height: 26px;
+  right: 12px;
+  top: -10px;
+}
+
+.nube-2 {
+  top: 120px;
+  width: 70px;
+  height: 22px;
+  animation-duration: 42s;
+}
+
+.nube-2::before {
+  width: 28px;
+  height: 28px;
+  left: 12px;
+  top: -14px;
+}
+
+.nube-2::after {
+  width: 22px;
+  height: 22px;
+  right: 10px;
+  top: -9px;
+}
+
+@keyframes deriva {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(70px);
+  }
+}
+
+/* ===== Plataformas ===== */
+.plataforma {
+  position: absolute;
+  background: linear-gradient(#a9713a, #7d4a1f);
+  border: 2px solid #5c381a;
+  border-radius: 6px;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
+}
+
+.plataforma::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(#7ec850, #4e9c37);
+  border-radius: 4px 4px 0 0;
+}
+
+.suelo {
+  height: 40px;
+  border-radius: 8px;
+}
+
+/* ===== Monedas ===== */
+.moneda {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.6), 0 2px 5px rgba(0, 0, 0, 0.3);
+  animation: flotar 1.2s ease-in-out infinite;
+}
+
+.moneda.amarilla {
+  background: radial-gradient(#fff3a6, #ffd23f 55%, #e0a600);
+  border: 2px solid #c98d00;
+  color: #8a6400;
+}
+
+.moneda.morada {
+  background: radial-gradient(#c9a4ff, #8f4dff 55%, #5b1fd6);
+  border: 2px solid #4a18b8;
+}
+
+@keyframes flotar {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* ===== Personaje ===== */
+#personaje {
+  position: absolute;
+  width: 34px;
+  height: 44px;
+  background: linear-gradient(#ff8a5c, #ff5a42);
+  border: 2px solid #c22f1a;
+  border-radius: 10px 10px 6px 6px;
+  z-index: 10;
+}
+
+.ojo {
+  position: absolute;
+  top: 10px;
+  width: 6px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.ojo::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 1px;
+  width: 3px;
+  height: 4px;
+  background: #222;
+  border-radius: 50%;
+}
+
+.ojo-izq {
+  left: 7px;
+}
+
+.ojo-der {
+  right: 7px;
+}
+
+/* ===== HUD ===== */
+#puntaje,
+#tiempo {
+  position: absolute;
+  top: 12px;
+  padding: 8px 16px;
+  background: rgba(20, 60, 90, 0.65);
+  color: #fff;
+  border-radius: 20px;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  z-index: 30;
+}
+
+#indicador-turno {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 18px;
+  color: #fff;
+  border-radius: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  z-index: 30;
+}
+
+#puntaje {
+  left: 14px;
+}
+
+#tiempo {
+  right: 14px;
+  transition: background 0.3s;
+}
+
+#tiempo.apuro {
+  background: #c0392b;
+  animation: parpadea 1s step-start infinite;
+}
+
+@keyframes parpadea {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+#pista-controles {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(23, 65, 95, 0.75);
+  z-index: 30;
+}
+
+/* ===== Texto flotante ===== */
+.feedback {
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  z-index: 35;
+  pointer-events: none;
+  animation: subir 0.9s ease-out forwards;
+}
+
+.feedback.ok {
+  color: #ffd23f;
+}
+
+.feedback.mor {
+  color: #d4b3ff;
+}
+
+@keyframes subir {
+  to {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+}
+
+/* ===== Overlays ===== */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 30, 45, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  z-index: 40;
+  gap: 14px;
+  padding: 20px;
+}
+
+.oculto {
+  display: none !important;
+}
+
+.overlay h1 {
+  font-size: 42px;
+  text-transform: uppercase;
+  text-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.overlay h2 {
+  font-size: 32px;
+  margin-bottom: 4px;
+}
+
+.overlay p {
+  font-size: 18px;
+  max-width: 520px;
+  line-height: 1.5;
+}
+
+.overlay small {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.overlay button,
+#btn-continuar {
+  font-family: inherit;
+  font-size: 18px;
+  padding: 12px 36px;
+  border: 0;
+  border-radius: 30px;
+  cursor: pointer;
+  background: linear-gradient(#ffd23f, #f5a800);
+  color: #5c3800;
+  font-weight: bold;
+  box-shadow: 0 4px 0 #b87d00;
+}
+
+.overlay button:hover,
+#btn-continuar:hover {
+  filter: brightness(1.08);
+}
+
+.overlay button:active,
+#btn-continuar:active {
+  box-shadow: 0 1px 0 #b87d00;
+  transform: translateY(3px);
+}
+
+.dificultades {
+  display: flex;
+  gap: 12px;
+}
+
+/* ===== Formulario de nombres ===== */
+#form-nombres {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 320px;
+}
+
+#form-nombres label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.etiqueta-jugador {
+  min-width: 90px;
+  text-align: right;
+}
+
+.etiqueta-jugador.j1 {
+  color: #ff7a55;
+}
+
+.etiqueta-jugador.j2 {
+  color: #5cb8ff;
+}
+
+.entrada {
+  font-family: inherit;
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 3px solid #fff;
+  background: #fff;
+  color: #223;
+  outline: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.entrada.jugador-1 {
+  border-color: #ff7a55;
+}
+
+.entrada.jugador-2 {
+  border-color: #5cb8ff;
+}
+
+.entrada:focus {
+  border-color: #8f4dff;
+}
+
+/* ===== Indicador de turno ===== */
+.turno-punto {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#tabla-puntajes {
+  font-size: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#tabla-puntajes p {
+  font-weight: bold;
+  margin: 0;
+}
+
+#ganador {
+  font-size: 26px;
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+/* ===== Dificultades ===== */
+.dificultad {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 15px;
+  color: #fff;
+}
+
+.dificultad.facil {
+  background: #27ae60;
+}
+
+.dificultad.media {
+  background: #e67e22;
+}
+
+.dificultad.dificil {
+  background: #c0392b;
+}
+
+/* ===== Modal de pregunta ===== */
+.carta {
+  background: #fff;
+  color: #223;
+  border-radius: 16px;
+  padding: 26px 30px;
+  width: 480px;
+  max-width: 92%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.carta h2 {
+  color: #4a18b8;
+  margin-bottom: 0;
+}
+
+#texto-pregunta {
+  font-size: 22px;
+  margin: 6px 0 14px;
+  color: #223;
+  max-width: 100%;
+}
+
+#opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+#opciones .opcion {
+  font-family: inherit;
+  font-size: 17px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #d5dce2;
+  background: #f5f8fa;
+  cursor: pointer;
+  color: #223;
+  text-align: left;
+  box-shadow: none;
+}
+
+#opciones .opcion:hover:not(:disabled) {
+  border-color: #8f4dff;
+  background: #f0e9ff;
+}
+
+#opciones .opcion:disabled {
+  cursor: default;
+}
+
+#opciones .opcion.correcta {
+  background: #d5f5d5;
+  border-color: #27ae60;
+}
+
+#opciones .opcion.incorrecta {
+  background: #fbd9d9;
+  border-color: #c0392b;
+}
+
+#resultado {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#resultado.ok {
+  color: #27ae60;
+}
+
+#resultado.mal {
+  color: #c0392b;
+}
